@@ -1,5 +1,5 @@
 class gameEngine {
-  function init_game(game: string) {
+  function init_game(game: number) {
     
   }
 }

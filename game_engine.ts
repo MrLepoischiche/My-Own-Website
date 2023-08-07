@@ -9,6 +9,7 @@ class GameEngine {
   }
   
   function init_game(game_index: number) {
-    
+    let game_div = document.createElement("div");
+    game_div.setAttribute("id", "gameSection");
   }
 }

@@ -3,4 +3,7 @@
   
   "game_engine.speed_typing.catchphrase":
   "Type faster than your shadow!",
+  
+  "game_engine.speed_typing.description":
+  "The goal is to write as many words as possible while being .\n\nPress the button, warm up your fingers, and get typing!\n\nGood luck!"
 }

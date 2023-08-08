@@ -27,13 +27,18 @@ class SpeedTyping {
     
     word_span = document.createElement("span");
     word_span.setAttribute("id", "wordToType");
+    
     user_input = document.createElement("input");
     user_input.setAttribute("type", "text");
     user_input.setAttribute("id", "userWord");
+    
     score_p = document.createElement("p");
     score_p.setAttribute("id", "score");
+    score_p.innerText = "Score : " + correct_words;
+    
     chrono_p = document.createElement("p");
     chrono_p.setAttribute("id", "chrono");
+    chrono_p.innerText = "00:00:0";
   }
 
   function increment_time(): void {

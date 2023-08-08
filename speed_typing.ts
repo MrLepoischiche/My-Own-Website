@@ -6,18 +6,36 @@ class SpeedTyping {
 
   var chrono: number;
 
-  const word_requested = document.getElementById("wordToType")!;
-  const user_input = document.getElementById("userWord")!;
-  const chrono_element = document.getElementById("chrono")!;
-  const score_element = document.getElementById("score")!;
+  const game_title : HTMLElement = document.createElement("h1");
+  const catchphr_p : HTMLElement = document.createElement("p");
+  const desc_p : HTMLElement = document.createElement("p");
 
+  const word_span : HTMLElement;
+  const user_input : HTMLElement;
+  const score_p : HTMLElement;
+  const chrono_p : HTMLElement;
 
-
-  function initialize_game(){
-    
+  function SpeedTyping() {
+    let game_div = document.getElementById("gameSection");
+    create_HTML_elements();
   }
 
-  function increment_time() {
+  function create_HTML_elements(): void {
+    game_title.innerText = "Speed Typing";
+    
+    
+    word_span = document.createElement("span");
+    word_span.setAttribute("id", "wordToType");
+    user_input = document.createElement("input");
+    user_input.setAttribute("type", "text");
+    user_input.setAttribute("id", "userWord");
+    score_p = document.createElement("p");
+    score_p.setAttribute("id", "score");
+    chrono_p = document.createElement("p");
+    chrono_p.setAttribute("id", "chrono");
+  }
+
+  function increment_time(): void {
     ++millisecs;
     if(millisecs > 999) {
       millisecs = 0;
@@ -28,7 +46,7 @@ class SpeedTyping {
       ++minutes;
     }
 
-    chrono_element.innerText = 
+    chrono_p.innerText = 
         (minutes < 10 ? "0" + minutes : minutes) + ":"
         + (seconds < 10 ? "0" + seconds : seconds) + ":"
         + millisecs;
@@ -47,12 +65,12 @@ class SpeedTyping {
       if(user_word !== ) {
         clearInterval(chrono);
         user_input.setAttribute("disabled", "true");
-        chrono_element.innerText = "Votre temps final est " + chrono_element.innerText;
-        score_element.innerText = "Votre score final : " + correct_words;
+        chrono_p.innerText = "Votre temps final est " + chrono_element.innerText;
+        score_p.innerText = "Votre score final : " + correct_words;
       }
       else {
         ++correct_words;
-        score_element.innerText = "Score : " + correct_words;
+        score_p.innerText = "Score : " + correct_words;
       }
     }
   });

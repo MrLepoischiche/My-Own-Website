@@ -9,6 +9,7 @@ class SpeedTyping {
   const game_title : HTMLElement = document.createElement("h1");
   const catchphr_p : HTMLElement = document.createElement("p");
   const desc_p : HTMLElement = document.createElement("p");
+  const word_p : HTMLElement = document.createElement("p");
 
   const word_span : HTMLElement;
   const user_input : HTMLElement;

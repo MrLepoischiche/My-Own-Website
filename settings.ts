@@ -1,6 +1,7 @@
 class Settings {
-  languages: string[] = [
+  const languages: string[] = [
     "English",
     "French"
     ];
+  
 }

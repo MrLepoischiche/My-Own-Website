@@ -1,83 +1,83 @@
 class SpeedTyping {
-  var millisecs: number = 0;
-  var seconds: number = 0;
-  var minutes: number = 0;
-  var correct_words: number = 0;
+  #millisecs!: number = 0;
+  #seconds!: number = 0;
+  #minutes!: number = 0;
+  #correct_words!: number = 0;
 
-  var chrono: number;
+  #chrono: number;
 
-  const game_title : HTMLElement = document.createElement("h1");
-  const catchphr_p : HTMLElement = document.createElement("p");
-  const desc_p : HTMLElement = document.createElement("p");
-  const word_p : HTMLElement = document.createElement("p");
+  const #game_title! : HTMLElement = document.createElement("h1");
+  const #catchphr_p! : HTMLElement = document.createElement("p");
+  const #desc_p! : HTMLElement = document.createElement("p");
+  const #word_p! : HTMLElement = document.createElement("p");
 
-  const word_span : HTMLElement;
-  const user_input : HTMLElement;
-  const score_p : HTMLElement;
-  const chrono_p : HTMLElement;
+  #word_span : HTMLElement;
+  #user_input : HTMLElement;
+  #score_p : HTMLElement;
+  #chrono_p : HTMLElement;
 
-  function SpeedTyping() {
+  init_speedtype() {
     let game_div = document.getElementById("gameSection");
-    create_HTML_elements();
+    this.create_HTML_elements();
   }
 
-  function create_HTML_elements(): void {
-    game_title.innerText = "Speed Typing";
+  create_HTML_elements(): void {
+    this.#game_title.innerText = "Speed Typing";
     
     
-    word_span = document.createElement("span");
-    word_span.setAttribute("id", "wordToType");
+    this.#word_span = document.createElement("span");
+    this.#word_span.setAttribute("id", "wordToType");
     
-    user_input = document.createElement("input");
-    user_input.setAttribute("type", "text");
-    user_input.setAttribute("id", "userWord");
-    
-    score_p = document.createElement("p");
-    score_p.setAttribute("id", "score");
-    score_p.innerText = "Score : " + correct_words;
-    
-    chrono_p = document.createElement("p");
-    chrono_p.setAttribute("id", "chrono");
-    chrono_p.innerText = "00:00:0";
-  }
+    this.#user_input = document.createElement("input");
+    this.#user_input.setAttribute("type", "text");
+    this.#user_input.setAttribute("id", "userWord");
 
-  function increment_time(): void {
-    ++millisecs;
-    if(millisecs > 999) {
-      millisecs = 0;
-      ++seconds;
-    }
-    if(seconds > 59) {
-      seconds = 0;
-      ++minutes;
-    }
-
-    chrono_p.innerText = 
-        (minutes < 10 ? "0" + minutes : minutes) + ":"
-        + (seconds < 10 ? "0" + seconds : seconds) + ":"
-        + millisecs;
-  }
-
-  user_input.addEventListener('input', () => {
-    if(minutes === 0 && seconds === 0 && millisecs === 0) {
-      chrono = setInterval(increment_time, 1);
-    }
-  });
-
-  user_input.addEventListener('keypress', (event) => {
-    let user_word = user_input.innerText;
-    user_input.innerText = "";
-    if(event.key === "Enter") {
-      if(user_word !== ) {
-        clearInterval(chrono);
-        user_input.setAttribute("disabled", "true");
-        chrono_p.innerText = "Votre temps final est " + chrono_element.innerText;
-        score_p.innerText = "Votre score final : " + correct_words;
+    this.#user_input.addEventListener('input', () => {
+      if(this.#minutes === 0 && this.#seconds === 0 && this.#millisecs === 0) {
+        this.#chrono = setInterval(() => this.increment_time, 1);
       }
-      else {
-        ++correct_words;
-        score_p.innerText = "Score : " + correct_words;
+    });
+  
+    this.#user_input.addEventListener('keypress', (event) => {
+      let user_word = this.#user_input.innerText;
+      this.#user_input.innerText = "";
+      if(event.key === "Enter") {
+        if(user_word !== ) {
+          clearInterval(this.#chrono);
+          this.#user_input.setAttribute("disabled", "true");
+          this.#chrono_p.innerText = "Votre temps final est " + this.#chrono_p.innerText;
+          this.#score_p.innerText = "Votre score final : " + this.#correct_words;
+        }
+        else {
+          ++this.#correct_words;
+          this.#score_p.innerText = "Score : " + this.#correct_words;
+        }
       }
+    });
+    
+    this.#score_p = document.createElement("p");
+    this.#score_p.setAttribute("id", "score");
+    this.#score_p.innerText = "Score : " + this.#correct_words;
+    
+    this.#chrono_p = document.createElement("p");
+    this.#chrono_p.setAttribute("id", "chrono");
+    this.#chrono_p.innerText = "00:00:0";
+  }
+
+  increment_time(): void {
+    ++this.#millisecs;
+    if(this.#millisecs > 999) {
+      this.#millisecs = 0;
+      ++this.#seconds;
     }
-  });
+    if(this.#seconds > 59) {
+      this.#seconds = 0;
+      ++this.#minutes;
+    }
+
+    this.#chrono_p.innerText = 
+        (this.#minutes < 10 ? "0" + this.#minutes : this.#minutes) + ":"
+        + (this.#seconds < 10 ? "0" + this.#seconds : this.#seconds) + ":"
+        + this.#millisecs;
+  }
 }

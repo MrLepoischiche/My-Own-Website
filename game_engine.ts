@@ -1,18 +1,16 @@
 class GameEngine {
-  let instance: GameEngine = null;
+  #instance: GameEngine;
   
-  function GameEngine() {
-    
-  }
+  private constructor() {}
   
-  function getInstance(): GameEngine {
-    if(instance === null){
-      instance = new GameEngine();
+  getInstance(): GameEngine {
+    if(this.#instance === null){
+      this.#instance = new GameEngine();
     }
-    return instance;
+    return this.#instance;
   }
   
-  function init_game(game_index: number) {
+  init_game(game_index: number) {
     
   }
 }

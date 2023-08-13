@@ -8,5 +8,8 @@
   "The goal is to write as many words as possible while being .\n\nPress the button, warm up your fingers, and get typing!\n\nGood luck!",
   
   "game_engine.speed_typing.word_p":
-  "Enter the word"
+  "Enter the word",
+
+  "footer.credits":
+  "Made by the Code Surfer !"
 }

@@ -8,5 +8,8 @@
   "Le but du jeu est d'écrire le plus de mots possible en étant chronométré.\n\nAppuyez sur le bouton, échauffez-vous les doigts, et à vous de jouer !\n\nBonne chance !",
   
   "game_engine.speed_typing.word_p":
-  "Entrez le mot"
+  "Entrez le mot",
+
+  "footer.credits":
+  "Conçu par le Code Surfer !"
 }

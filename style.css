@@ -1,0 +1,19 @@
+* {
+  align-content: center;
+}
+
+body > div {
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  top: 5%;
+  background-color: cyan;
+}
+
+body > div > p {
+  color: white;
+}
+
+#wordToType {
+  font-weight: bold;
+}

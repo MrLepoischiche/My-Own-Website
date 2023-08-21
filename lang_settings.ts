@@ -5,18 +5,27 @@ class LanguageSettings {
     "English",
     "French"
   ];
-  
+
   private static lang_selector : HTMLElement = document.getElementById("lang_selector")!;
 
-  static init_select() {
-    for (let lang in LanguageSettings.languages) {
-      let option = document.createElement("option");
-      option.setAttribute("value", lang.toLowerCase());
-      //option.setAttribute("style", "");
-      option.innerText = lang.slice(0, 2).toUpperCase();
-      LanguageSettings.lang_selector.appendChild(option);
-    }
+
+  constructor() {
+    document.addEventListener("load", () => {
+      LanguageSettings.fetch_property_value(document.URL.split("/").pop() + ".title")
+      .then(data => document.title = data)
+    });
+
+    LanguageSettings.lang_selector.addEventListener("load", () => {
+      for (let lang in LanguageSettings.languages) {
+        let option = document.createElement("option");
+        option.setAttribute("value", lang.toLowerCase());
+        //option.setAttribute("style", "");
+        option.innerText = lang.slice(0, 2).toUpperCase();
+        LanguageSettings.lang_selector.appendChild(option);
+      }
+    });
   }
+
 
   static get lang(): string {
     if(this.selected_lang > this.languages.length)
@@ -25,10 +34,13 @@ class LanguageSettings {
   }
 
   static set select_lang(value : number) {
-    LanguageSettings.selected_lang = value;
+    if(value !== LanguageSettings.selected_lang) {
+      LanguageSettings.selected_lang = value;
+      location.reload();
+    }
   }
   
-  static get_property_value(key : string, lang? : number | string) : string {
+  static async fetch_property_value(key : string, lang? : number | string) {
     let query : string = './';
     
     switch (typeof lang) {
@@ -46,13 +58,16 @@ class LanguageSettings {
     }
 
     query += '.json';
-
-    let data = fetch(query, {
+    
+    const response = await fetch(query, {
       headers: {
-        'Accept': 'application/json'
+        'content-type': 'application/json'
       }
-    }).then((res) => {return res.json()});
+    })
 
-    return data[key];
+    const {data, errors} = await response.json();
+    if(response.ok){
+      return data?.key;
+    }
   }
 }

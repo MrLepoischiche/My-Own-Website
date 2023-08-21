@@ -1,14 +1,19 @@
 {
-  "game_engine.catchphrase":"Un petit jeu ?",
+  "index.title":
+  "La page du Code Surfer",
+
+
+  "game.game_engine.catchphrase":"Un petit jeu ?",
   
-  "game_engine.speed_typing.catchphrase":
+  "game.game_engine.speed_typing.catchphrase":
   "Écrivez plus vite que votre ombre !",
   
-  "game_engine.speed_typing.description":
+  "game.game_engine.speed_typing.description":
   "Le but du jeu est d'écrire le plus de mots possible en étant chronométré.\n\nAppuyez sur le bouton, échauffez-vous les doigts, et à vous de jouer !\n\nBonne chance !",
   
-  "game_engine.speed_typing.word_p":
+  "game.game_engine.speed_typing.word_p":
   "Entrez le mot",
+  
 
   "footer.credits":
   "Conçu par le Code Surfer !"

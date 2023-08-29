@@ -1,0 +1,94 @@
+body {
+  background-color: blanchedalmond;
+}
+
+#site_title {
+  text-align: center;
+  font-size: 500%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+p {
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 175%;
+}
+
+#navigation {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  flex-grow: 200px;
+}
+
+#lang_selector {
+  
+}
+
+
+
+.primary-box {
+  background-color: cornflowerblue;
+
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.content-box {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+  border-radius: 10%;
+}
+
+.box-inside-box {
+  border-radius: 10%;
+  min-height: 3cm;
+  background-color: slateblue;
+  font-style: italic;
+}
+
+.center-in-box {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.text-in-box {
+  color: aliceblue;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+  margin-top: 5%;
+}
+
+.text-out-box {
+  color: royalblue;
+}
+
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky +  {
+  padding-top: 300px;
+}
+
+#footer_section {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
+}

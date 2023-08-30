@@ -42,7 +42,7 @@ function get_langs_by_name(name) {
   const conn = mysql.createConnection(user_access);
 
   conn.query(
-      'SELECT * FROM `languages` WHERE \'name\' LIKE ' + name + ';', [id],
+      'SELECT * FROM `languages` WHERE \'name\' LIKE %' + name + '%;', [id],
       (err, res) =>
       {
         if(!err) {

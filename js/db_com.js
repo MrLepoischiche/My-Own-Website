@@ -1,82 +1,59 @@
-const mysql = require('mysql2');
+const mysqlp = require('mysql2/promise');
 
 const user_access = {
-  host: '%',
+  //host: '',           // Prod
+  host: '192.168.1.57', // Dev
   user: 'average_user',
   database: 'my_own_website'
 };
 
 
-function get_lang_by_id(id) {
-  if(typeof id !== Number) {
-    throw new Error(`id must be Number, not ${typeof id}!`);
+async function get_lang_by_id(id) {
+  if(typeof id !== 'number') {
+    throw new Error(`id must be number, not ${typeof id}!`);
   }
 
-  let lang = undefined;
-  const conn = mysql.createConnection(user_access);
+  const conn = await mysqlp.createConnection(user_access);
 
-  conn.query(
-      'SELECT * FROM `languages` WHERE \'id\' = ?;', [id],
-      (err, res) =>
-      {
-        if(!err) {
-          lang = res;
-        }
-        else {
-          console.log(`ERROR ${err.code} (${err.name}) : ${err.message}. (fatal = ${err.fatal})`);
-        }
-      }
-  );
+  const [rows, fields] = await conn.query('SELECT `name`, `content` FROM `languages` WHERE `id` = ' + id + ';');
 
   conn.end();
 
-  return lang;
-}
-
-function get_langs_by_name(name) {
-  if(typeof name !== String) {
-    throw new Error(`name must be String, not ${typeof name}!`);
+  if(!rows){
+    throw new Error(`${get_lang_by_id.name}: Nothing was found.`);
   }
 
-  let lang = undefined;
-  const conn = mysql.createConnection(user_access);
-
-  conn.query(
-      'SELECT * FROM `languages` WHERE \'name\' LIKE %' + name + '%;', [id],
-      (err, res) =>
-      {
-        if(!err) {
-          lang = res;
-        }
-        else {
-          console.log(`ERROR ${err.code} (${err.name}) : ${err.message}. (fatal = ${err.fatal})`);
-        }
-      }
-  );
-
-  conn.end();
-
-  return lang;
+  return rows;
 }
 
-function get_all_langs() {
-  let lang = undefined;
-  const conn = mysql.createConnection(user_access);
+async function get_langs_by_name(name) {
+  if(typeof name !== 'string') {
+    throw new Error(`name must be string, not ${typeof name}!`);
+  }
 
-  conn.query(
-      'SELECT * FROM `languages`;',
-      (err, res) =>
-      {
-        if(!err) {
-          lang = res;
-        }
-        else {
-          console.log(`ERROR ${err.code} (${err.name}) : ${err.message}. (fatal = ${err.fatal})`);
-        }
-      }
-  );
+  const conn = await mysqlp.createConnection(user_access);
+
+  const [rows, fields] = await conn.query('SELECT `name`, `content` FROM `languages` WHERE `name` LIKE "%' + name + '%";');
 
   conn.end();
 
-  return lang;
+  if(!rows){
+    throw new Error(`${get_langs_by_name.name}: Nothing was found.`);
+  }
+
+  return rows;
+}
+
+async function get_all_langs() {
+  const conn = await mysqlp.createConnection(user_access);
+
+  const [rows, fields] = await conn.query('SELECT `name`, `content` FROM `languages`;');
+
+  conn.end();
+  
+  if(!rows){
+    throw new Error(`${get_all_langs.name}: Nothing was found.`);
+  }
+
+  return rows;
 }

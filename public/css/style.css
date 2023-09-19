@@ -1,0 +1,167 @@
+@font-face {
+  font-family: "Changa";
+  src:
+    local("Changa"),
+    url("./custom_fonts/Changa-VariableFont_wght.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Changa One";
+  src:
+    local("Changa One"),
+    url("./custom_fonts/ChangaOne-Regular.ttf") format("opentype");
+}
+
+a {
+  text-decoration-line: none;
+}
+
+a:hover {
+  text-decoration-line: underline;
+}
+
+p {
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 175%;
+}
+
+
+
+.shadowed-text {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+.big-title {
+  margin-bottom: 10%;
+  
+  text-align: center;
+  font-family: 'Changa';
+
+  backdrop-filter: blur(2px);
+}
+
+.big-title a {
+  color: #282828;
+  text-decoration-line: none;
+}
+
+.big-title > a h1 {
+  margin-bottom: 0%;
+
+  font-size: 600%;
+}
+
+.big-title > a h2 {
+  margin-top: 0%;
+
+  font-weight: 500;
+  font-size: 200%;
+}
+
+
+
+#navigation {
+  position: sticky;
+  top: 0px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: cornflowerblue;
+
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#navigation a {
+  color: beige;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.nav-text {
+  justify-content: center;
+
+  color: white;
+  text-align: center;
+  font-family: 'Changa';
+  font-size: 24px;
+}
+
+.nav-sides {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#lang_selector {
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: blanchedalmond;
+
+  text-align: center;
+  font-family: 'Changa';
+  font-size: 16px;
+  color: black;
+
+  cursor: pointer;
+}
+
+
+
+.content-text {
+  font-family: "Changa";
+}
+
+
+
+section > div {
+  background-color: cornflowerblue;
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+  border-radius: 10%;
+}
+
+section > div > div {
+  border-radius: 10%;
+  min-height: 3cm;
+  background-color: royalblue;
+  font-style: italic;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.text-in-box {
+  color: aliceblue;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
+.text-out-box {
+  color: royalblue;
+  text-align: center;
+}
+
+
+
+#footer_section {
+  background-color: whitesmoke;
+  width: 100%;
+  text-align: justify;
+}

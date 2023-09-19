@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      <%- include("../partials/head") %>
+  </head>
+
+  <body>
+    <header id="header_section">
+      <%- include("../partials/header") %>
+    </header>
+
+    <section id="content_section" class="content-text shadowed-text">
+      <div class="content-box">
+        <h1 id="welcome_title" class="text-in-box"></h1>
+        <p id="welcome_p" class="text-in-box"></p>
+      </div>
+    </section>
+
+    <script>
+      document.getElementById("welcome_title").innerHTML = window.getPageProperty("welcome_title");
+      document.getElementById("welcome_p").innerHTML = window.getPageProperty("welcome_p");
+    </script>
+
+    <footer id="footer_section">
+      <%- include("../partials/footer") %>
+    </footer>
+
+  </body>
+
+</html>

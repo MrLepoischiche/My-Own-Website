@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+  let lang_data = <%- data %>;
+
+  window.curr_lang = JSON.parse(lang_data["curr_lang"]);
+  window.all_langs = JSON.parse(lang_data["all_langs"]);
+
+  window.getPageProperty = function(id) {
+    let curr_lang_json = JSON.parse(curr_lang["content"]);
+
+    let current_page = 
+        (location.href.lastIndexOf("/") === location.href.length - 1)
+        ? "index"
+        : location.href.split("/").pop();
+    
+    return curr_lang_json[current_page + "." + id];
+  }
+
+  document.title = JSON.parse(window.curr_lang["content"])["index.head"];
+</script>

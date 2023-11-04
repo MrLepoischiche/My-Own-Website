@@ -1,14 +1,16 @@
- const path = require("path"),
+const path = require("path"),
   body_parser = require("body-parser"),
+  prompt = require("prompt-sync")({sigint: true}),
   express = require("express"),
   session = require("express-session"),
   back = require("express-back");
+  translate = import("translate");
 
 
 // ----------- MySQL2 -----------
 const mysql = require("mysql2");
 
-const host_addr = "192.168.1.57";
+const host_addr = prompt("Host address : "); // "192.168.1.116"
 const db_name = "my_own_website";
 
 const user_access = {
@@ -49,7 +51,8 @@ app.listen(port, () => {
 
 
 app.get("/", (request, response) => {
-  let lang_data = {};
+  let website_data = {lang_data:{}};
+
   if(!request.session.selected_lang) {
     request.session.selected_lang = 1;
     request.session.save();
@@ -57,31 +60,46 @@ app.get("/", (request, response) => {
 
   let db_conn = mysql.createConnection(user_access);
   db_conn.query(
-    "select `id`, `name` from `languages`;",
+    "select `id`, `name` from Languages;",
     (error, result, fields) => {
-      if(error) throw error;
-      lang_data.all_langs = JSON.stringify(result);
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+
+      website_data.lang_data.all_langs = JSON.stringify(result);
     }
   );
 
   db_conn.query(
-    "select * from `languages` where `id` = " + request.session.selected_lang + ";",
-    (error, result, fields) => {
-      if(error) throw error;
-      lang_data.curr_lang = JSON.stringify(result[0]);
+    "select * from Languages where `id` = " + request.session.selected_lang + ";",
+    (error, results, fields) => {
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+
+      website_data.lang_data.curr_lang = JSON.stringify(results[0]);
 
       response.render(path.join("pages/index"),
-        {
-          root: __dirname,
-          data: JSON.stringify(lang_data)
-        }
+          {
+            root: __dirname,
+            data: JSON.stringify(website_data)
+          }
       );
     }
   );
+
+  db_conn.end();
 });
 
+
 app.get("/about", (request, response) => {
-  let lang_data = {};
+  let website_data = {
+    lang_data:{},
+    cv_data:{}
+  };
+
   if(!request.session.selected_lang) {
     request.session.selected_lang = 1;
     request.session.save();
@@ -89,31 +107,90 @@ app.get("/about", (request, response) => {
 
   let db_conn = mysql.createConnection(user_access);
   db_conn.query(
-    "select `id`, `name` from `languages`;",
+    "select `id`, `name` from Languages;",
     (error, result, fields) => {
-      if(error) throw error;
-      lang_data.all_langs = JSON.stringify(result);
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+
+      website_data.lang_data.all_langs = JSON.stringify(result);
     }
   );
 
   db_conn.query(
-    "select * from `languages` where `id` = " + request.session.selected_lang + ";",
-    (error, result, fields) => {
-      if(error) throw error;
-      lang_data.curr_lang = JSON.stringify(result[0]);
+    "select * from Languages where `id` = " + request.session.selected_lang + ";",
+    (error, results, fields) => {
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
 
+      website_data.lang_data.curr_lang = JSON.stringify(results[0]);
+      
+      // TODO : À mettre dans le callback de la dernière query();
       response.render(path.join("pages/about"),
         {
           root: __dirname,
-          data: JSON.stringify(lang_data)
+          data: JSON.stringify(website_data)
         }
       );
     }
   );
+
+  /*
+  db_conn.query(
+    "select * from SoftSkills;",
+    (error, results, fields) => {
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+      
+      const curr_lang_name = JSON.parse(website_data.lang_data.curr_lang).name;
+
+      for(const res of results) {
+        translate(
+          res, {to: String(curr_lang_name).substring(0, 1).toLocaleLowerCase()}
+        )
+        .then((value) => {
+          website_data.cv_data.soft_skills += value;
+        });
+      }
+      console.log(website_data.cv_data.soft_skills);
+    }
+  );
+
+  db_conn.query(
+    "select * from ;",
+    (error, results, fields) => {
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+      
+      const curr_lang_name = JSON.parse(website_data.lang_data.curr_lang).name;
+
+      for(const res of results) {
+        translate(
+          res, {to: String(curr_lang_name).substring(0, 1).toLocaleLowerCase()}
+        )
+        .then((value) => {
+          //website_data.cv_data. += value;
+        });
+      }
+      //console.log(website_data.cv_data.);
+    }
+  );
+  */
+  
+  db_conn.end();
 });
 
+
 app.get("/contact", (request, response) => {
-  let lang_data = {};
+  let website_data = {lang_data:{}};
+
   if(!request.session.selected_lang) {
     request.session.selected_lang = 1;
     request.session.save();
@@ -121,28 +198,39 @@ app.get("/contact", (request, response) => {
 
   let db_conn = mysql.createConnection(user_access);
   db_conn.query(
-    "select `id`, `name` from `languages`;",
+    "select `id`, `name` from Languages;",
     (error, result, fields) => {
-      if(error) throw error;
-      lang_data.all_langs = JSON.stringify(result);
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+      
+      website_data.lang_data.all_langs = JSON.stringify(result);
     }
   );
 
   db_conn.query(
-    "select * from `languages` where `id` = " + request.session.selected_lang + ";",
-    (error, result, fields) => {
-      if(error) throw error;
-      lang_data.curr_lang = JSON.stringify(result[0]);
+    "select * from Languages where `id` = " + request.session.selected_lang + ";",
+    (error, results, fields) => {
+      if(error) {
+        if(error.code === "ETIMEDOUT") throw error;
+        else console.error(error.code + " : " + error.message);
+      }
+      
+      website_data.lang_data.curr_lang = JSON.stringify(results[0]);
 
       response.render(path.join("pages/contact"),
-        {
-          root: __dirname,
-          data: JSON.stringify(lang_data)
-        }
+          {
+            root: __dirname,
+            data: JSON.stringify(website_data)
+          }
       );
     }
   );
+
+  db_conn.end();
 });
+
 
 
 app.post("/setLang", (request, response) => {
@@ -151,6 +239,7 @@ app.post("/setLang", (request, response) => {
   response.end();
   back();
 });
+
 
 
 app.use((request, response, next) => {

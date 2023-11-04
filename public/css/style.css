@@ -12,6 +12,10 @@
     url("./custom_fonts/ChangaOne-Regular.ttf") format("opentype");
 }
 
+* {
+  font-family: 'Changa';
+}
+
 a {
   text-decoration-line: none;
 }
@@ -39,11 +43,10 @@ p {
   
   text-align: center;
   font-family: 'Changa';
-
-  backdrop-filter: blur(2px);
 }
 
 .big-title a {
+  width: auto;
   color: #282828;
   text-decoration-line: none;
 }
@@ -64,9 +67,11 @@ p {
 
 
 #navigation {
-  position: sticky;
+  position: fixed;
   top: 0px;
+  left: 0px;
   height: 20px;
+  width: calc(100% - 80px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -117,14 +122,14 @@ p {
 
 
 
-.content-text {
-  font-family: "Changa";
+section > p {
+  color:cornflowerblue;
 }
-
 
 
 section > div {
   background-color: cornflowerblue;
+  color: aliceblue;
   text-align: center;
   margin-top: 5%;
   margin-bottom: 10%;
@@ -137,6 +142,7 @@ section > div {
   border-radius: 10%;
 }
 
+
 section > div > div {
   border-radius: 10%;
   min-height: 3cm;
@@ -144,18 +150,6 @@ section > div > div {
   font-style: italic;
   margin-left: 5%;
   margin-right: 5%;
-}
-
-.text-in-box {
-  color: aliceblue;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 5%;
-}
-
-.text-out-box {
-  color: royalblue;
-  text-align: center;
 }
 
 

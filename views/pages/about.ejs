@@ -6,21 +6,33 @@
   </head>
 
   <body>
+
     <header id="header_section">
       <%- include("../partials/header") %>
     </header>
 
-    <section id="content_section" class="content-text shadowed-text">
-      <div class="content-box">
-        <h1 id="welcome_title" class="text-in-box"></h1>
-        <p id="welcome_p" class="text-in-box"></p>
-      </div>
-    </section>
+    <section id="content_section" class="shadowed-text">
 
-    <script>
-      document.getElementById("welcome_title").innerHTML = window.getPageProperty("welcome_title");
-      document.getElementById("welcome_p").innerHTML = window.getPageProperty("welcome_p");
-    </script>
+      <script>
+        for(let section of JSON.parse(window.getPageProperty("sections"))) {
+          section = JSON.parse(section);
+          
+          document.write("<div><h2>"
+              + section.title
+              + "</h2>"
+          );
+
+          if(section.title.includes("CV")) {
+            let cv = JSON.parse(section.content);
+            console.dir(cv);
+          }
+          else document.write("<p>" + section.content + "</p>");
+          
+          document.write("</div><br/><br/>");
+        }
+      </script>
+
+    </section>
 
     <footer id="footer_section">
       <%- include("../partials/footer") %>
